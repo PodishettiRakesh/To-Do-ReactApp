@@ -10,9 +10,11 @@ const Todo = () => {
         setTodos([...todos, {no:count++, text:inputRef.current.value, display:""}])
         inputRef.current.value= "";
     }
+
     useEffect(()=>{
         console.log(todos);
     },[todos])
+    
   return (
     <div className='todo'>
       <div className='todo-header'>To-Do List</div>
