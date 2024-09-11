@@ -10,10 +10,19 @@ const Todo = () => {
     const add = () =>{
         setTodos([...todos, {no:count++, text:inputRef.current.value, display:""}])
         inputRef.current.value= "";
+        localStorage.setItem("todos_count");
     }
 
     useEffect(()=>{
-        console.log(todos);
+        setTodos(JSON.parse(localStorage.getItem("todos")))
+        count = localStorage.getItem("todos_count");
+    },[])
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            console.log(todos);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        },100);
     },[todos])
 
   return (
@@ -25,7 +34,7 @@ const Todo = () => {
       </div>
       <div className="todo-list">
         {todos.map((item,index)=>{
-            return <TodoItems key={index} no={item.no} display={item.display} text={item.display}/>
+            return <TodoItems key={index} no={item.no} display={item.display} text={item.text}/>
         })}
       </div>
     </div>
